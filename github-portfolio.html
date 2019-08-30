@@ -20,6 +20,9 @@
             animation-iteration-count: infinite;
             animation-timing-function: linear; 
         }
+        .link:hover{
+            background: transparent;
+        }
         @keyframes spin {
             from {
                 transform:rotate(0deg);
@@ -38,7 +41,7 @@
             <nav class="navbar fixed" style="border: none; background-color: rgba(255, 255, 255, 0.98)">
         
                 <!-- This link will stay here on mobile and tablet -->
-                <a class="link" href="#isradeleon">{{user}}</a>
+                <a class="link text-size-s" href="#top">{{user}}</a>
             
                 <!-- CSS animated menu icon -->
                 <input class="menu-toggle" type="checkbox" id="menu1">
@@ -47,25 +50,22 @@
                 </label>
         
                 <!-- This content will be responsive on mobile and tablet -->
-                <div class="navbar-content">
+                <div class="navbar-content text-size-s">
                     <div class="navbar-end">
-                        <a class="link text-secondary" href="#technologies">
-                            Technologies
+                        <a class="link" href="#languages">
+                            Languages
                         </a>
-                        <a class="link text-secondary" href="#portfolio">
-                            Portfolio
-                        </a>
-                        <a class="link text-secondary" href="#about">
-                            About
+                        <a class="link" href="#repositories">
+                            Repositories
                         </a>
                     </div>
                 </div>
             
             </nav>
 
-            <div class="site-section white" style="background: transparent;">
+            <div id="top" class="site-section white" style="background: transparent;">
 
-                <div class="container text-center">
+                <div class="container below-navbar text-center">
                     <div class="circular-img profile" v-bind:style="{ backgroundImage: 'url('+object.avatar_url+')' }"></div>
                     <h1 class="main-title">{{object.name ? object.name : object.login}}</h1>
                     <p class="below-title">{{object.bio}}</p>
@@ -76,8 +76,8 @@
                 </div>
             </div>
 
-            <div class="site-section">
-                <div class="container text-center">
+            <div id="languages" class="site-section">
+                <div class="container below-navbar text-center">
                     <h1>Languages</h1>
                     <p class="below-title">Most relevant languages:</p>
                     <template>
@@ -88,8 +88,8 @@
                 </div>
             </div>
 
-            <div class="site-section white">
-                <div class="container text-center">
+            <div id="repositories" class="site-section white">
+                <div class="container below-navbar text-center">
                     <h1>Repositories</h1>
                     <div v-for="repo in repositories">
                         {{repo.name}}
