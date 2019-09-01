@@ -97,7 +97,7 @@
                     <h1 class="text-center">Repositories</h1>
                     <p class="text-center below-title">Total: {{repositories.length}}</p>
                     <div class="grid">
-                        <div v-for="repo in repositories" class="col-4">
+                        <div v-for="repo in listing" class="col-4">
                             <div class="repository flex column">
                                 <a target="_blank" :href="repo.html_url" class="text-size-6 text-bold">
                                     {{repo.name}}
@@ -114,6 +114,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button v-on:click="showAll()" v-if="!showing && repositories.length > 9" class="btn small secondary rounded">
+                            <i class="fa fa-eye"></i> Show all
+                        </button>
                     </div>
                 </div>
             </div>
@@ -170,6 +176,7 @@
                     loading: false,
                     user: '',
                     object: {},
+                    showing: false,
                     languages: {},
                     options: {
                         labels: [],
@@ -190,9 +197,14 @@
                     },
                     series: [],
                     repositories: [],
+                    listing: [],
                     totalStars: 0
                 },
                 methods:{
+                    showAll(){
+                        this.listing = this.repositories
+                        this.showing = true
+                    },
                     getUserData(){
                         console.log(this.user)
                         this.loading = true;
@@ -213,6 +225,14 @@
                         .then(data => {
                             console.log(data);
                             this.repositories = data;
+
+                            if (this.repositories.length > 9) {
+                                this.listing = this.repositories.slice(0,9)
+                                this.listing.slice(0,9)
+                            }else{
+                                this.listing = this.repositories
+                            }
+
                             for (let i = 0; i < data.length; i++) {
                                 const repo = data[i];
                                 this.totalStars+=repo['stargazers_count']
