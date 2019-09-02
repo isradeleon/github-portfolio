@@ -117,13 +117,23 @@
                     </div>
 
                     <div class="text-center">
-                        <button v-on:click="showAll()" v-if="!showing && repositories.length > 9" class="btn small secondary rounded">
+                        <button v-on:click="showAll()" v-if="!showing && repositories.length > 9" class="btn small text-secondary rounded">
                             <i class="fa fa-eye"></i> Show all
                         </button>
                     </div>
                 </div>
             </div>
 
+            <footer style="background: white; position: relative;">
+                <div class="container text-size-s">
+                    <p>
+                        <a target="_blank" href="https://github.com/isradeleon/github-portfolio">
+                            <i class="fab fa-github"></i> Github repository
+                        </a><br>
+                        Made with <i class="far fa-heart"></i> by <a target="_blank" href="https://github.com/isradeleon">@isradeleon</a>
+                    </p>
+                </div>
+            </footer>
 
         </div>
     
