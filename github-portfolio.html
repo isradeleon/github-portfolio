@@ -40,7 +40,7 @@
 <body>
     <div style="position: fixed; top: 0; bottom: 0; right: 0; left: 0;" id="particles-js"></div>
     <main>
-        <div v-if="!loading && user">
+        <div v-if="!loading && ready">
        <!--  <div v-if="user.length > 0 && !loading"> -->
             <nav class="navbar fixed" style="border: none; background-color: rgba(255, 255, 255, 0.98)">
         
@@ -136,16 +136,16 @@
             </div>
         </div>
     
-        <div v-if="user.length == 0">
+        <div v-if="!ready && !loading">
             <div class="site-section">
                 <div class="container flex items-center justify-center column">
                     <div style="width: 100%;" class="text-center">
                         <h1>Github portfolio</h1>
                         <p class="below-title text-gray">Type the username to generate a portoflio for that profile:</p>
-                        <input class="rounded full-width" placeholder="github_username" style="max-width: 400px;" type="text">
+                        <input v-model="user" class="rounded full-width" placeholder="github_username" style="max-width: 400px;" type="text">
                         <br>
                     </div>
-                    <button v-on:click="getUserData()" class="btn rounded primary small inverted full-width" style="max-width: 400px;">
+                    <button v-on:click="loadUserPortfolio()" class="btn rounded primary small inverted full-width" style="max-width: 400px;">
                         Generate
                     </button>
                 </div>
@@ -176,6 +176,7 @@
                     loading: false,
                     user: '',
                     object: {},
+                    ready: false,
                     showing: false,
                     languages: {},
                     options: {
@@ -205,9 +206,15 @@
                         this.listing = this.repositories
                         this.showing = true
                     },
+                    loadUserPortfolio(){
+                        console.log(window.location.host)
+                        window.location.href = '?user='+this.user;
+                    },
                     getUserData(){
                         console.log(this.user)
                         this.loading = true;
+
+                        this.ready = true;
 
                         fetch( "https://api.github.com/users/"+this.user)
                         .then(response => response.json())
@@ -216,6 +223,8 @@
                             if(data.login){
                                 this.object = data;
                                 this.getUserRepos()
+                            }else{
+                                window.location.href = window.location.href.split('?')[0];
                             }
                         });
                     },
