@@ -1,8 +1,10 @@
 # [Github portfolio generator](http://isradeleon.com/github-portfolio.html)
 
-Simple github portfolio generator, just provide the github username! Get a chart with the main languages within your repositories and your total number of stars.
+Simple github portfolio generator, just provide your github username! Get a chart with the main languages within your repositories and your total number of stars:
 
-[Github portfolio](http://isradeleon.com/github-portfolio.html)
+![portfolio preview](github-portfolio.jpg)
+
+[Generate a github portfolio](http://isradeleon.com/github-portfolio.html)
 
 ## License
 
